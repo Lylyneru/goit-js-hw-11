@@ -1,34 +1,22 @@
 const API_KEY = '47392920-efce9c2b3427e3353db7767ab';
-const API_URL = 'https://pixabay.com/api/';
+const BASE_URL = 'https://pixabay.com/api/';
 
-// Функція для виконання запиту до API
-// export async function fetchImages(query) {
-//   const params = new URLSearchParams({
-//     key: API_KEY,
-//     q: query,
-//     image_type: 'photo',
-//     orientation: 'horizontal',
-//     safesearch: true,
-//   });
+export function fetchImages(query, page = 1, perPage = 20) {
+  const url = `${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(
+    query
+  )}&image_type=photo&orientation=horizontal&safesearch=true&per_page=${perPage}&page=${page}`;
 
-//   const response = await fetch(`${API_URL}?${params}`);
-//   if (!response.ok) {
-//     throw new Error('Failed to fetch images');
-//   }
-//   return response.json();
-// }
-
-const params = new URLSearchParams({
-  key: API_KEY,
-  q: query,
-  image_type: 'photo',
-  orientation: 'horizontal',
-  safesearch: true,
-});
-
-fetch(`${API_URL}?${params}`).then(response => {
-  if (!response.ok) {
-    throw new Error('Failed to fetch images');
-  }
-  return response.json();
-});
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.hits.length === 0) {
+        throw new Error('No images found');
+      }
+      return data;
+    });
+}
