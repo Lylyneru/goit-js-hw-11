@@ -20,6 +20,29 @@ function onSearch(e) {
     return;
   }
 
+  let currentPage = 1;
+
+  document.querySelector('.load-more').addEventListener('click', () => {
+    currentPage += 1;
+    fetchImages(query, currentPage)
+      .then(images => {
+        if (images.length === 0) {
+          iziToast.warning({
+            title: 'No more results',
+            message: 'No more images found.',
+          });
+          document.querySelector('.load-more').style.display = 'none';
+        } else {
+          renderImages(images);
+        }
+      })
+      .catch(error => {
+        iziToast.error({
+          title: 'Error',
+          message: error.message,
+        });
+      });
+  });
   clearGallery();
 
   fetchImages(query)
