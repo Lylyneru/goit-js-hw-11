@@ -9,7 +9,7 @@ export function renderImages(images) {
       <a href="${image.largeImageURL}" class="gallery-item">
         <div class="photo-card">
           <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
-          <div class="info">
+          <div class="card-info">
             <p><b>Likes:</b> ${image.likes}</p>
             <p><b>Views:</b> ${image.views}</p>
             <p><b>Comments:</b> ${image.comments}</p>

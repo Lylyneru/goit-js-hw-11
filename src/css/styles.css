@@ -15,13 +15,10 @@ body {
 }
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
-  width: 90%;
-  margin: 32px 156px;
-  padding: 0;
-  list-style: none;
+  max-width: 1128px;
+  margin: 0 auto;
 }
 
 .gallery-item {
@@ -29,8 +26,10 @@ body {
 }
 
 .photo-card {
-  background: white;
-  border-radius: 8px;
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -41,18 +40,20 @@ body {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.photo-card img {
+.photo-card {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.photo-card .info {
+.card-info {
+  display: flex;
+  justify-content: space-between;
   padding: 10px;
   font-size: 14px;
   color: #333;
 }
 
-.photo-card .info p {
-  margin: 5px 0;
+.card-info span {
+  white-space: nowrap;
 }
