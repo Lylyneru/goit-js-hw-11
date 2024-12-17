@@ -1,8 +1,6 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-// let lightbox = new SimpleLightbox('.gallery a'); // Ініціалізація
-
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
@@ -44,3 +42,5 @@ export function renderImages(images) {
   gallery.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh(); // Оновлюємо SimpleLightbox
 }
+
+console.log(gallery.innerHTML);

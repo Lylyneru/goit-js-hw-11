@@ -15,13 +15,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Займає всю висоту вікна */
+  height: 100vh;
 }
 
 .search-form {
   display: flex;
+  unicode-bidi: isolate;
   justify-content: center;
-  margin: 20px 0;
+  margin: 0 auto;
+  margin-top: 36px;
+  margin-bottom: 36px;
   position: absolute;
   top: 0;
   left: 50%;
@@ -83,7 +86,7 @@ body {
   font-weight: 500;
 }
 
-.loader {
+/* .loader {
   border: 8px solid #f3f3f3;
   border-top: 8px solid #3498db;
   border-radius: 50%;
@@ -95,17 +98,17 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
-}
+} */
 
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 
-@keyframes spin {
+/* @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
   }
-}
+} */
