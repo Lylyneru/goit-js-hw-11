@@ -1,7 +1,13 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-let lightbox = new SimpleLightbox('.gallery a'); // Ініціалізація
+// let lightbox = new SimpleLightbox('.gallery a'); // Ініціалізація
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  captionClass: 'emageTitle',
+});
 
 export function renderImages(images) {
   const gallery = document.querySelector('.gallery');

@@ -12,6 +12,10 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Займає всю висоту вікна */
 }
 
 .search-form {
