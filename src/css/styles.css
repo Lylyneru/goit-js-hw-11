@@ -17,6 +17,16 @@ body {
   align-items: center;
   height: 100vh;
 }
+header {
+  display: block;
+  unicode-bidi: isolate;
+  top: 0; /* Форма буде прилипати до верхнього краю */
+  background-color: #ffffff; /* Фон форми, щоб перекривати інші елементи */
+  z-index: 10; /* Забезпечує, що інпут завжди буде поверх інших елементів */
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тінь для виділення */
+  text-align: center; /* Вирівнювання по центру */
+}
 
 .search-form {
   display: flex;
