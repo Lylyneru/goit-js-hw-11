@@ -29,7 +29,7 @@ export function fetchImages(query) {
   const BASE_URL = 'https://pixabay.com/api/';
   const url = `${BASE_URL}?key=${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true`;
 
-  console.log('Fetching URL:', url); // Перевірка URL в консолі
+  // console.log('Fetching URL:', url); // Перевірка URL в консолі
 
   return fetch(url)
     .then(response => {

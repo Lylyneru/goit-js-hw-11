@@ -18,6 +18,10 @@ body {
   display: flex;
   justify-content: center;
   margin: 20px 0;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .search-form input {
