@@ -1,113 +1,30 @@
-import { renderImages, clearGallery } from './render-functions.js';
-import { fetchImages } from './pixabay-api.js';
+import { fetchImages } from './src/js/pixabay-api.js';
+import { renderImages } from './src/js/render-functions.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('.search-form');
-const gallery = document.querySelector('.gallery');
 
-form.addEventListener('submit', onSearch);
-
-function onSearch(e) {
+form.addEventListener('submit', e => {
   e.preventDefault();
-  const query = e.target.elements.searchQuery.value.trim();
 
+  const query = e.target.searchQuery.value.trim();
   if (!query) {
     iziToast.warning({
       title: 'Warning',
-      message: 'Search field cannot be empty!',
+      message: 'Please enter a search term!',
     });
     return;
   }
 
-  let currentPage = 1;
-
-  document.querySelector('.load-more').addEventListener('click', () => {
-    currentPage += 1;
-    fetchImages(query, currentPage)
-      .then(images => {
-        if (images.length === 0) {
-          iziToast.warning({
-            title: 'No more results',
-            message: 'No more images found.',
-          });
-          document.querySelector('.load-more').style.display = 'none';
-        } else {
-          renderImages(images);
-        }
-      })
-      .catch(error => {
-        iziToast.error({
-          title: 'Error',
-          message: error.message,
-        });
-      });
-  });
-  clearGallery();
-
   fetchImages(query)
     .then(images => {
-      if (images.length === 0) {
-        iziToast.info({
-          title: 'No results',
-          message: 'Sorry, no images found. Try another query.',
-        });
-        return;
-      }
       renderImages(images);
     })
     .catch(error => {
       iziToast.error({
         title: 'Error',
-        message: error.message,
+        message: 'Failed to fetch images. Please try again later.',
       });
     });
-}
-
-window.addEventListener('scroll', () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-    currentPage += 1;
-    fetchImages(query, currentPage)
-      .then(images => {
-        renderImages(images);
-      })
-      .catch(error => {
-        iziToast.error({
-          title: 'Error',
-          message: error.message,
-        });
-      });
-  }
-});
-
-let isFetching = false;
-
-window.addEventListener('scroll', () => {
-  if (isFetching) return;
-
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-    isFetching = true;
-    currentPage += 1;
-
-    fetchImages(query, currentPage)
-      .then(images => {
-        if (images.length === 0) {
-          iziToast.info({
-            title: 'End of results',
-            message: 'No more images to load.',
-          });
-          return;
-        }
-        renderImages(images);
-      })
-      .catch(error => {
-        iziToast.error({
-          title: 'Error',
-          message: error.message,
-        });
-      })
-      .finally(() => {
-        isFetching = false;
-      });
-  }
 });

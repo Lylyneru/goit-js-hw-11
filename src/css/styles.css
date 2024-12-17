@@ -11,49 +11,66 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #f8f9fa;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.search-form input {
+  padding: 10px;
+  width: 300px;
+  border: 2px solid #ddd;
+  border-radius: 4px 0 0 4px;
+}
+
+.search-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
 }
 
 .gallery {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  max-width: 1128px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Три стовпці */
+  gap: 20px; /* Відстань між елементами */
+  margin: 20px auto;
+  max-width: 1200px; /* Обмеження ширини */
 }
 
-.gallery-item {
-  text-decoration: none;
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden; /* Обрізати зайве */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
 
-.photo-card {
-  display: block;
+.card:hover {
+  transform: scale(1.03); /* Анімація наведення */
+}
+
+.card img {
   width: 100%;
-  height: auto;
-  background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.photo-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.photo-card {
-  display: block;
-  width: 100%;
-  height: auto;
+  height: 200px;
+  object-fit: cover; /* Вписуємо картинку */
 }
 
 .card-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around; /* Розташування у рядок */
   padding: 10px;
+  background-color: #fff;
   font-size: 14px;
-  color: #333;
 }
 
 .card-info span {
-  white-space: nowrap;
+  font-weight: 500;
 }

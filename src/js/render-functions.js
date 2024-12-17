@@ -1,39 +1,31 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 export function renderImages(images) {
   const gallery = document.querySelector('.gallery');
+
+  gallery.innerHTML = ''; // Очищення попередніх результатів
+
+  if (images.length === 0) {
+    iziToast.error({
+      title: 'Error',
+      message:
+        'Sorry, there are no images matching your search query. Please try again!',
+    });
+    return;
+  }
+
   const markup = images
     .map(
       image => `
-      <a href="${image.largeImageURL}" class="gallery-item">
-        <div class="photo-card">
-          <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
-          <div class="card-info">
-            <p><b>Likes:</b> ${image.likes}</p>
-            <p><b>Views:</b> ${image.views}</p>
-            <p><b>Comments:</b> ${image.comments}</p>
-            <p><b>Downloads:</b> ${image.downloads}</p>
-          </div>
-        </div>
-      </a>
-    `
+    <div class="card">
+      <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
+      <div class="card-info">
+        <span>Likes: ${image.likes}</span>
+        <span>Views: ${image.views}</span>
+        <span>Comments: ${image.comments}</span>
+        <span>Downloads: ${image.downloads}</span>
+      </div>
+    </div>`
     )
     .join('');
 
-  gallery.innerHTML += markup;
-
-  // Ініціалізація SimpleLightbox
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-
-  lightbox.refresh(); // Оновлення галереї після додавання нових елементів
-}
-
-export function clearGallery() {
-  const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = '';
+  gallery.insertAdjacentHTML('beforeend', markup);
 }
