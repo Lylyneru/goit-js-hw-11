@@ -12,34 +12,31 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f8f9fa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 .header {
   position: sticky;
   top: 0; /* Форма завжди зверху */
   background-color: #fff;
-  padding: 10px 0;
+  padding: 15px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000; /* Шапка буде зверху */
   text-align: center;
 }
+
 .search-form {
   display: flex;
-  unicode-bidi: isolate;
+  /* unicode-bidi: isolate; */
   justify-content: center;
   align-items: center;
   gap: 8px;
   margin: 0 auto;
-  margin-top: 36px;
+  /* margin-top: 36px;
   margin-bottom: 36px;
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
 }
 
 .search-form input {
@@ -47,10 +44,12 @@ body {
   width: 300px;
   border: 2px solid #ddd;
   border-radius: 4px 0 0 4px;
+  font-size: 16px;
 }
 
 .search-form button {
   padding: 10px;
+  font-size: 16px;
   background-color: #007bff;
   color: #fff;
   border: none;
