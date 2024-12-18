@@ -17,21 +17,22 @@ body {
   align-items: center;
   height: 100vh;
 }
-header {
-  display: block;
-  unicode-bidi: isolate;
-  top: 0; /* Форма буде прилипати до верхнього краю */
-  background-color: #ffffff; /* Фон форми, щоб перекривати інші елементи */
-  z-index: 10; /* Забезпечує, що інпут завжди буде поверх інших елементів */
-  padding: 10px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тінь для виділення */
-  text-align: center; /* Вирівнювання по центру */
-}
 
+.header {
+  position: sticky;
+  top: 0; /* Форма завжди зверху */
+  background-color: #fff;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Шапка буде зверху */
+  text-align: center;
+}
 .search-form {
   display: flex;
   unicode-bidi: isolate;
   justify-content: center;
+  align-items: center;
+  gap: 8px;
   margin: 0 auto;
   margin-top: 36px;
   margin-bottom: 36px;
@@ -96,29 +97,21 @@ header {
   font-weight: 500;
 }
 
-/* .loader {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #3498db;
+.loader {
+  margin: 20px auto;
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
   animation: spin 1s linear infinite;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-} */
+}
 
-/* .hidden {
-  display: none;
-} */
-
-/* @keyframes spin {
+@keyframes spin {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
   }
-} */
+}

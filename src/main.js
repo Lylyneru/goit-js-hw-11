@@ -1,34 +1,62 @@
-import { fetchImages } from './js/pixabay-api.js';
-import { renderImages } from './js/render-functions.js';
+import { fetchImages } from './src/js/pixabay-api.js';
+import { renderImages, clearGallery } from './src/js/render-functions.js';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import SimpleLightbox from 'simplelightbox';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-// const searchForm = document.querySelector('form');
-const searchForm = document.querySelector('.search-form');
-// const input = document.querySelector('input[name="searchQuery"]');
+const searchForm = document.querySelector('#search-form');
 const galleryContainer = document.querySelector('.gallery');
+let lightbox = new SimpleLightbox('.gallery a');
 
-searchForm.addEventListener('submit', event => {
-  event.preventDefault(); // Забороняє перезавантаження сторінки
+// Функція обробки події на формі
+searchForm.addEventListener('submit', onSearch);
 
-  // const query = input.value.trim(); // Отримуємо значення з інпуту
-  const query = event.currentTarget.elements.searchQuery.value.trim();
-  // if (query === '') {
-  //   alert('Please enter a search term!'); // Перевірка на порожній ввід
-  //   return;
-  // }
+function onSearch(event) {
+  event.preventDefault();
+
+  const query = event.currentTarget.searchQuery.value.trim();
+
   if (!query) {
-    showError('Please enter a search query');
+    iziToast.warning({
+      title: 'Warning',
+      message: 'Please enter a search query!',
+    });
     return;
   }
 
-  fetchImages(query) // Виконуємо запит до API
+  // Показуємо індикатор завантаження
+  showLoader();
+
+  fetchImages(query)
     .then(images => {
-      renderImages(images, galleryContainer); // Рендеримо галерею
+      clearGallery(galleryContainer); // Очищаємо галерею
+      renderImages(images, galleryContainer, lightbox); // Рендеримо зображення
+      iziToast.success({
+        title: 'Success',
+        message: 'Images loaded successfully!',
+      });
     })
     .catch(error => {
-      console.error('Error:', error);
-      showError('No images found. Please try another query.');
-      clearGallery();
+      clearGallery(galleryContainer); // Очистка галереї у разі помилки
+      iziToast.error({
+        title: 'Error',
+        message:
+          error.message ||
+          'Sorry, there are no images matching your search query. Please try again!',
+      });
+    })
+    .finally(() => {
+      hideLoader(); // Ховаємо індикатор завантаження
     });
-});
+}
+
+// Показ індикатора завантаження
+function showLoader() {
+  galleryContainer.innerHTML = `<div class="loader"></div>`;
+}
+
+// Сховати індикатор завантаження
+function hideLoader() {
+  document.querySelector('.loader')?.remove();
+}
