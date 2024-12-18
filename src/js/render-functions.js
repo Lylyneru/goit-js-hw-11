@@ -44,3 +44,25 @@ export function renderImages(images) {
 }
 
 console.log(gallery.innerHTML);
+
+// Функція для показу помилок з iziToast
+function showError(message) {
+  iziToast.error({
+    title: 'Error',
+    message: message,
+    position: 'topRight',
+    timeout: 3000,
+  });
+}
+
+// Функція для очищення галереї
+function clearGallery() {
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = '';
+}
+
+// Рендеринг зображень
+function renderImages(images) {
+  const gallery = document.querySelector('.gallery');
+  clearGallery(); // Очищаємо перед додаванням нових результатів
+}
